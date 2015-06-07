@@ -1,6 +1,5 @@
 package dk.trustworks.timemanager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.MediaType;
 import dk.trustworks.framework.persistence.Helper;
 import dk.trustworks.framework.service.ServiceRegistry;
@@ -27,17 +26,17 @@ import java.util.Properties;
 /**
  * Created by hans on 16/03/15.
  */
-public class TimeManagerApplication {
+public class TimeApplication {
 
     public static final String JSON_UTF8 = MediaType.JSON_UTF_8.toString();
 
     static ServiceProvider serviceProvider;
 
     public static void main(String[] args) throws Exception {
-        new TimeManagerApplication(Integer.parseInt(args[0]));
+        new TimeApplication(Integer.parseInt(args[0]));
     }
 
-    public TimeManagerApplication(int port) throws Exception {
+    public TimeApplication(int port) throws Exception {
         System.out.println("TimeManager on port "+port);
         Class.forName("org.mariadb.jdbc.Driver");
         Properties properties = new Properties();
