@@ -91,12 +91,12 @@ public class WorkRepository extends GenericRepository {
         List<Map<String, Object>> result = new ArrayList<>();
         try {
             Connection connection = database.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("SELECT yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
+            PreparedStatement stmt = connection.prepareStatement("SELECT yt.uuid, yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
                             "FROM work yt INNER JOIN( " +
                             "SELECT uuid, month, year, day, workduration, taskuuid, useruuid, max(created) created " +
                             "FROM work WHERE month = ? AND year = ? " +
                             "GROUP BY day, month, year, taskuuid, useruuid) ss " +
-                            "ON yt.month = ss.month AND yt.year = ss.year AND yt.created = ss.created AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid;",
+                            "ON yt.day = ss.day AND yt.month = ss.month AND yt.year = ss.year AND yt.created = ss.created AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid;",
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             stmt.setInt(1, Integer.parseInt(month));
             stmt.setInt(2, Integer.parseInt(year));
