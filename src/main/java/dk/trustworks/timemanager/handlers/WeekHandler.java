@@ -1,11 +1,9 @@
 package dk.trustworks.timemanager.handlers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.trustworks.framework.server.DefaultHandler;
 import dk.trustworks.framework.service.DefaultLocalService;
 import dk.trustworks.timemanager.persistence.WeekRepository;
 import dk.trustworks.timemanager.service.WeekService;
-import dk.trustworks.timemanager.time.model.Week;
 import io.undertow.server.HttpServerExchange;
 
 import java.util.List;
