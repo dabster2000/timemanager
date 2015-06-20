@@ -10,6 +10,8 @@ import dk.trustworks.framework.service.DefaultLocalService;
 import dk.trustworks.timemanager.persistence.TaskWeekViewRepository;
 import dk.trustworks.timemanager.persistence.WeekRepository;
 import dk.trustworks.timemanager.persistence.WorkRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.time.DayOfWeek;
@@ -23,6 +25,7 @@ import static java.util.Calendar.*;
  */
 public class TaskWeekViewService extends DefaultLocalService {
 
+    private static final Logger log = LogManager.getLogger(TaskWeekViewService.class);
     private TaskWeekViewRepository taskWeekViewRepository;
 
     public TaskWeekViewService() {
@@ -48,12 +51,10 @@ public class TaskWeekViewService extends DefaultLocalService {
             }
             if(dublet) continue;
             Map<String, Object> taskWeekView = new HashMap<>();
-            System.out.println("task = " + task);
             Map<String, Object> project = new ProjectService().getOneEntity("projects", task.get("projectuuid").toString());
             Map<String, Object> client = new ClientService().getOneEntity("clients", project.get("clientuuid").toString());
             taskWeekView.put("taskname", task.get("name") + " / " + project.get("name") + " / " + client.get("name"));
             taskWeekView.put("taskuuid", taskUUID.toString());
-            List<Map<String, Object>> workByTaskAndUser = workRepository.findByTaskUUIDAndUserUUID(taskUUID.toString(), userUUID);
 
             double budgetLeft = 0.0;
             try {
@@ -64,7 +65,7 @@ public class TaskWeekViewService extends DefaultLocalService {
                         .asJson();
                 budgetLeft = (double)jsonResponse.getBody().getObject().get("remaining");
             } catch (UnirestException e) {
-                e.printStackTrace();
+                log.error("LOG00780:", e);
             }
 
             taskWeekView.put("budgetleft", budgetLeft);
