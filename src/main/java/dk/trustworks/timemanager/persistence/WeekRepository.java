@@ -36,24 +36,6 @@ public class WeekRepository extends GenericRepository {
             log.error("LOG00570:", e);
         }
         return new ArrayList<>();
-        /*
-        List<Map<String, Object>> result = new ArrayList<>();
-        try {
-            Connection connection = database.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM week w WHERE w.weeknumber = ? AND w.year = ? AND w.useruuid LIKE ? AND taskuuid LIKE ? ORDER BY sorting ASC", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            stmt.setInt(1, weekNumber);
-            stmt.setInt(2, year);
-            stmt.setString(3, userUUID);
-            stmt.setString(4, taskUUID);
-            ResultSet resultSet = stmt.executeQuery();
-            result = getEntitiesFromResultSet(resultSet);
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-        */
     }
 
     public List<Map<String, Object>> findByWeekNumberAndYearAndUserUUIDOrderBySortingAsc(int weekNumber, int year, String userUUID) {
@@ -69,23 +51,6 @@ public class WeekRepository extends GenericRepository {
             log.error("LOG00580:", e);
         }
         return new ArrayList<>();
-        /*
-        List<Map<String, Object>> result = new ArrayList<>();
-        try {
-            Connection connection = database.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM week w WHERE w.weeknumber = ? AND w.year = ? AND w.useruuid LIKE ? ORDER BY sorting ASC", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            stmt.setInt(1, weekNumber);
-            stmt.setInt(2, year);
-            stmt.setString(3, userUUID);
-            ResultSet resultSet = stmt.executeQuery();
-            result = getEntitiesFromResultSet(resultSet);
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-        */
     }
 
     @Override
@@ -104,19 +69,6 @@ public class WeekRepository extends GenericRepository {
         } catch (Exception e) {
             log.error("LOG00600:", e);
         }
-        /*
-        //testForNull(jsonNode, new String[]{"useruuid", "taskUUID", "weekNumber", "year"});
-        System.out.println("Create week: "+jsonNode);
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO week (uuid, taskuuid, useruuid, weeknumber, year) VALUES (?, ?, ?, ?, ?)", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-        stmt.setString(1, UUID.randomUUID().toString());
-        stmt.setString(2, jsonNode.get("taskuuid").asText());
-        stmt.setString(3, jsonNode.get("useruuid").asText());
-        stmt.setInt(4, jsonNode.get("weeknumber").asInt());
-        stmt.setInt(5, jsonNode.get("year").asInt());
-        stmt.executeUpdate();
-        stmt.close();
-        */
     }
 
     @Override
