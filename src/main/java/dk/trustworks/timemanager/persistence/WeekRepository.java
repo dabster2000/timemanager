@@ -95,7 +95,7 @@ public class WeekRepository extends GenericRepository {
         try (org.sql2o.Connection con = database.open()) {
             con.createQuery("INSERT INTO week (uuid, taskuuid, useruuid, weeknumber, year)" +
                     " VALUES (:uuid, :taskuuid, :useruuid, :weeknumber, :year)")
-                    .addParameter("uuid", jsonNode.get("uuid").asText(UUID.randomUUID().toString()))
+                    .addParameter("uuid", UUID.randomUUID().toString())
                     .addParameter("taskuuid", jsonNode.get("taskuuid").asText())
                     .addParameter("useruuid", jsonNode.get("useruuid").asText())
                     .addParameter("weeknumber", jsonNode.get("weeknumber").asInt())
