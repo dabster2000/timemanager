@@ -235,7 +235,7 @@ public class WorkRepository extends GenericRepository {
                     .addParameter("year", jsonNode.get("year").asInt())
                     .addParameter("taskuuid", jsonNode.get("taskuuid").asText())
                     .addParameter("useruuid", jsonNode.get("useruuid").asText())
-                    .addParameter("workduration", jsonNode.get("workduration").asInt())
+                    .addParameter("workduration", jsonNode.get("workduration").asDouble())
                     .addParameter("created", Timestamp.from(Instant.now()))
                     .executeUpdate();
         } catch (Exception e) {
