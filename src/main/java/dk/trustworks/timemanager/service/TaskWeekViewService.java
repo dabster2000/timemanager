@@ -43,17 +43,9 @@ public class TaskWeekViewService extends DefaultLocalService {
         List<Map<String, Object>> taskWeekViews = new ArrayList<>();
         List<Map<String, Object>> weeks = weekRepository.findByWeekNumberAndYearAndUserUUIDOrderBySortingAsc(weekNumber, year, userUUID);
 
-        //for (Map<String, Object> week : weeks) {
         StreamSupport.stream(weeks.spliterator(), true).map((week) -> {
             Object taskUUID = week.get("taskuuid");
             Map<String, Object> task = new TaskService().getOneEntity("tasks", taskUUID.toString());
-            /*
-            boolean dublet = false;
-            for (Map<String, Object> tempView : taskWeekViews) {
-                if (tempView.get("taskuuid").equals(taskUUID.toString())) dublet = true;
-            }
-            //if(dublet) continue;
-            */
             Map<String, Object> taskWeekView = new HashMap<>();
             Map<String, Object> project = new ProjectService().getOneEntity("projects", task.get("projectuuid").toString());
             Map<String, Object> client = new ClientService().getOneEntity("clients", project.get("clientuuid").toString());
@@ -88,15 +80,9 @@ public class TaskWeekViewService extends DefaultLocalService {
                 }
                 c.add(DATE, 1);
             }
-            //taskWeekViews.add(taskWeekView);
             return taskWeekView;
         }).forEach(result -> taskWeekViews.add(result));
-            //return taskWeekView;
-        //System.out.println("taskWeekViews... = " + taskWeekViews.get(2));
         taskWeekViews.sort((p1, p2) -> Integer.compare(Integer.parseInt(p1.get("sorting").toString()), Integer.parseInt(p2.get("sorting").toString())));
-        //}).forEach(result -> taskWeekViews.add(result));
-        //taskWeekViews.sort((e1, e2) -> Integer.compare((Integer) e1.get("sorting"),
-          //      (Integer) e2.get("sorting")));
 
         return taskWeekViews;
     }
