@@ -6,7 +6,10 @@ import dk.trustworks.framework.service.ServiceRegistry;
 import dk.trustworks.timemanager.handlers.TaskWeekViewHandler;
 import dk.trustworks.timemanager.handlers.WeekHandler;
 import dk.trustworks.timemanager.handlers.WorkHandler;
-import dk.trustworks.timemanager.service.*;
+import dk.trustworks.timemanager.service.ClientService;
+import dk.trustworks.timemanager.service.ProjectService;
+import dk.trustworks.timemanager.service.TaskService;
+import dk.trustworks.timemanager.service.UserService;
 import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;
@@ -37,8 +40,7 @@ public class TimeApplication {
     }
 
     public TimeApplication(int port) throws Exception {
-        System.out.println("TimeManager on port "+port);
-        Class.forName("org.mariadb.jdbc.Driver");
+        System.out.println("TimeManager on port " + port);
         Properties properties = new Properties();
         try (InputStream in = Helper.class.getResourceAsStream("server.properties")) {
             properties.load(in);
