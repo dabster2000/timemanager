@@ -16,6 +16,11 @@ public class ProjectService extends DefaultRemoteService {
     private final RemoteEntity remoteEntity = new RemoteEntity();
 
     @Override
+    public List<Map<String, Object>> findByParentUUID(String entityName, String parentUUIDName, String parentUUID) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
     public List<Map<String, Object>> getAllEntities(String entityName) {
         throw new RuntimeException("Not implemented");
     }
