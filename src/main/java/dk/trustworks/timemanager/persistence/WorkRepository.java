@@ -67,9 +67,9 @@ public class WorkRepository extends GenericRepository {
             return getEntitiesFromMapSet(con.createQuery("SELECT yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
                     "FROM work yt INNER JOIN( " +
                     "SELECT uuid, month, year, day, workduration, taskuuid, useruuid, max(created) created " +
-                    "FROM work WHERE useruuid LIKE :useruuid AND year = :year" +
-                    "GROUP BY day, month, year) ss " +
-                    "ON yt.month = ss.month AND yt.year = ss.year AND yt.day = ss.day AND yt.created = ss.created AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid;")
+                    "FROM work WHERE useruuid LIKE :useruuid AND year = :year " +
+                    "group by day, month, year, taskuuid, useruuid " +
+                    ") ss on yt.month = ss.month and yt.year = ss.year and yt.day = ss.day and yt.created = ss.created and yt.taskuuid = ss.taskuuid and yt.useruuid = ss.useruuid;")
                     .addParameter("useruuid", userUUID)
                     .addParameter("year", year)
                     .executeAndFetchTable().asList());
