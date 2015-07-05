@@ -26,7 +26,7 @@ public class WeekRepository extends GenericRepository {
         log.debug("WeekRepository.findByWeekNumberAndYearAndUserUUIDAndTaskUUIDOrderBySortingAsc");
         log.debug("weekNumber = [" + weekNumber + "], year = [" + year + "], userUUID = [" + userUUID + "], taskUUID = [" + taskUUID + "]");
         try (org.sql2o.Connection con = database.open()) {
-            return getEntitiesFromMapSet(con.createQuery("SELECT DISTINCT w.taskuuid, w.useruuid, w.weeknumber, w.year FROM week w WHERE w.weeknumber = :weeknumber AND w.year = :year AND w.useruuid LIKE :useruuid AND taskuuid LIKE :taskuuid ORDER BY sorting ASC")
+            return getEntitiesFromMapSet(con.createQuery("SELECT DISTINCT taskuuid, useruuid, weeknumber, year FROM week w WHERE w.weeknumber = :weeknumber AND w.year = :year AND w.useruuid LIKE :useruuid AND taskuuid LIKE :taskuuid ORDER BY sorting ASC")
                     .addParameter("weeknumber", weekNumber)
                     .addParameter("year", year)
                     .addParameter("useruuid", userUUID)
@@ -42,7 +42,7 @@ public class WeekRepository extends GenericRepository {
         log.debug("WeekRepository.findByWeekNumberAndYearAndUserUUIDOrderBySortingAsc");
         log.debug("weekNumber = [" + weekNumber + "], year = [" + year + "], userUUID = [" + userUUID + "]");
         try (org.sql2o.Connection con = database.open()) {
-            return getEntitiesFromMapSet(con.createQuery("SELECT DISTINCT w.taskuuid, w.useruuid, w.weeknumber, w.year FROM week w WHERE w.weeknumber = :weeknumber AND w.year = :year AND w.useruuid LIKE :useruuid ORDER BY sorting ASC")
+            return getEntitiesFromMapSet(con.createQuery("SELECT DISTINCT taskuuid, useruuid, weeknumber, year FROM week w WHERE w.weeknumber = :weeknumber AND w.year = :year AND w.useruuid LIKE :useruuid ORDER BY sorting ASC")
                     .addParameter("weeknumber", weekNumber)
                     .addParameter("year", year)
                     .addParameter("useruuid", userUUID)
