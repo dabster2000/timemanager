@@ -1,6 +1,8 @@
 package dk.trustworks.timemanager.persistence;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import dk.trustworks.framework.persistence.GenericRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by hans on 17/03/15.
@@ -19,6 +22,8 @@ import java.util.UUID;
 public class WorkRepository extends GenericRepository {
 
     private static final Logger log = LogManager.getLogger(WorkRepository.class);
+
+    Cache<String, Double> calculateTaskUserTotalDurationCache = CacheBuilder.newBuilder().maximumSize(100).build();
 
     public WorkRepository() {
         super();
@@ -203,23 +208,30 @@ public class WorkRepository extends GenericRepository {
     public double calculateTaskUserTotalDuration(String taskUUID, String userUUID) {
         log.debug("WorkRepository.calculateTaskUserTotalDuration");
         log.debug("taskUUID = [" + taskUUID + "], userUUID = [" + userUUID + "]");
-        try (org.sql2o.Connection con = database.open()) {
-            return con.createQuery("SELECT sum(workduration) sum FROM ( " +
-                    "SELECT yt.year, yt.month, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
-                    "FROM work yt INNER JOIN( " +
-                    "SELECT uuid, day, month, year, workduration, taskuuid, useruuid, max(created) created " +
-                    "FROM work WHERE taskuuid LIKE :taskuuid AND useruuid LIKE :useruuid " +
-                    "GROUP BY day, month, year) ss " +
-                    "ON yt.month = ss.month AND yt.year = ss.year AND yt.day = ss.day AND yt.created = ss.created " +
-                    "AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid " +
-                    ") we;")
-                    .addParameter("taskuuid", taskUUID)
-                    .addParameter("useruuid", userUUID)
-                    .executeScalar(Double.class);
-        } catch (Exception e) {
-            log.error("LOG00700:", e);
+        try {
+            return calculateTaskUserTotalDurationCache.get(taskUUID+userUUID, () -> {
+                try (org.sql2o.Connection con = database.open()) {
+                    return con.createQuery("SELECT sum(workduration) sum FROM ( " +
+                            "SELECT yt.year, yt.month, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
+                            "FROM work yt INNER JOIN( " +
+                            "SELECT uuid, day, month, year, workduration, taskuuid, useruuid, max(created) created " +
+                            "FROM work WHERE taskuuid LIKE :taskuuid AND useruuid LIKE :useruuid " +
+                            "GROUP BY day, month, year) ss " +
+                            "ON yt.month = ss.month AND yt.year = ss.year AND yt.day = ss.day AND yt.created = ss.created " +
+                            "AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid " +
+                            ") we;")
+                            .addParameter("taskuuid", taskUUID)
+                            .addParameter("useruuid", userUUID)
+                            .executeScalar(Double.class);
+                } catch (Exception e) {
+                    log.error("LOG00700:", e);
+                }
+                return 0.0;
+            });
+        } catch (ExecutionException e) {
+            log.error("LOG00860:", e);
+            throw new RuntimeException(e);
         }
-        return 0.0;
     }
 
     @Override
@@ -238,6 +250,8 @@ public class WorkRepository extends GenericRepository {
                     .addParameter("workduration", jsonNode.get("workduration").asDouble())
                     .addParameter("created", Timestamp.from(Instant.now()))
                     .executeUpdate();
+
+            calculateTaskUserTotalDurationCache.invalidateAll();
         } catch (Exception e) {
             log.error("LOG00710:", e);
         }
