@@ -30,7 +30,7 @@ public class WorkRepository extends GenericRepository {
         log.debug("WorkRepository.findByTaskUUID");
         log.debug("taskuuid = [" + taskUUID + "]");
         try (org.sql2o.Connection con = database.open()) {
-            return getEntitiesFromMapSet(con.createQuery("select yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid" +
+            return getEntitiesFromMapSet(con.createQuery("select yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
                     "from work yt inner join( " +
                     "select uuid, month, year, day, workduration, taskuuid, useruuid, max(created) created " +
                     "from work WHERE taskuuid LIKE :taskuuid " +
