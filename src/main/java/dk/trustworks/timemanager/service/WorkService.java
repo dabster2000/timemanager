@@ -2,8 +2,10 @@ package dk.trustworks.timemanager.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import dk.trustworks.framework.persistence.GenericRepository;
-import dk.trustworks.timemanager.persistence.WorkRepository;
 import dk.trustworks.framework.service.DefaultLocalService;
+import dk.trustworks.timemanager.persistence.WorkRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.Deque;
@@ -15,6 +17,7 @@ import java.util.Map;
  */
 public class WorkService extends DefaultLocalService {
 
+    private static final Logger log = LogManager.getLogger(WorkService.class);
     private WorkRepository workRepository;
 
     public WorkService() {
@@ -38,9 +41,11 @@ public class WorkService extends DefaultLocalService {
     }
 
     public List<Map<String, Object>> findByYearAndMonth(Map<String, Deque<String>> queryParameters) {
-        String year = queryParameters.get("year").getFirst();
-        String month = queryParameters.get("month").getFirst();
-        return workRepository.findByYearAndMonth(year, month);
+        int year = Integer.parseInt(queryParameters.get("year").getFirst());
+        int month = Integer.parseInt(queryParameters.get("month").getFirst());
+        List<Map<String, Object>> result = workRepository.findByYearAndMonth(year, month);
+        log.debug("result: "+result.size());
+        return result;
     }
 
     public List<Map<String, Object>> findByYearAndMonthAndTaskUUIDAndUserUUID(Map<String, Deque<String>> queryParameters) {

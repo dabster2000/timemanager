@@ -81,23 +81,23 @@ public class WorkRepository extends GenericRepository {
         return new ArrayList<>();
     }
 
-    public List<Map<String, Object>> findByYearAndMonth(String year, String month) {
+    public List<Map<String, Object>> findByYearAndMonth(int year, int month) {
         log.debug("WorkRepository.findByYearAndMonth");
         log.debug("year = [" + year + "], month = [" + month + "]");
         try (org.sql2o.Connection con = database.open()) {
-            return getEntitiesFromMapSet(con.createQuery("SELECT yt.uuid, yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
+            return getEntitiesFromMapSet(con.createQuery("select yt.month, yt.year, yt.day, yt.created, yt.workduration, yt.taskuuid, yt.useruuid " +
                     "FROM work yt INNER JOIN( " +
                     "SELECT uuid, month, year, day, workduration, taskuuid, useruuid, max(created) created " +
                     "FROM work WHERE month = :month AND year = :year " +
-                    "GROUP BY day, month, year, taskuuid, useruuid) ss " +
-                    "ON yt.day = ss.day AND yt.month = ss.month AND yt.year = ss.year AND yt.created = ss.created AND yt.taskuuid = ss.taskuuid AND yt.useruuid = ss.useruuid;")
+                    "group by day, month, year, taskuuid, useruuid " +
+                    ") ss on yt.month = ss.month and yt.year = ss.year and yt.day = ss.day and yt.created = ss.created and yt.taskuuid = ss.taskuuid and yt.useruuid = ss.useruuid;")
                     .addParameter("month", month)
                     .addParameter("year", year)
                     .executeAndFetchTable().asList());
         } catch (Exception e) {
             log.error("LOG00640:", e);
+            throw new RuntimeException(e);
         }
-        return new ArrayList<>();
     }
 
     public List<Map<String, Object>> findByYearAndMonthAndTaskUUIDAndUserUUID(String year, String month, String taskUUID, String userUUID) {
@@ -117,8 +117,8 @@ public class WorkRepository extends GenericRepository {
                     .executeAndFetchTable().asList());
         } catch (Exception e) {
             log.error("LOG00650:", e);
+            throw new RuntimeException(e);
         }
-        return new ArrayList<>();
     }
 
     public List<Map<String, Object>> findByYearAndMonthAndDayAndTaskUUIDAndUserUUID(int year, int month, int day, String taskUUID, String userUUID) {
