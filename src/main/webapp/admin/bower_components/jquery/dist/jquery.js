@@ -853,7 +853,7 @@ function Sizzle( selector, context, results, seed ) {
 /**
  * Create key-value caches of limited size
  * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
- *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
+ *	property name the (space-suffixed) string and (if the caches is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
 function createCache() {
@@ -1699,7 +1699,7 @@ Expr = Sizzle.selectors = {
 
 						start = [ forward ? parent.firstChild : parent.lastChild ];
 
-						// non-xml :nth-child(...) stores cache data on `parent`
+						// non-xml :nth-child(...) stores caches data on `parent`
 						if ( forward && useCache ) {
 							// Seek `elem` from a previously-cached index
 							outerCache = parent[ expando ] || (parent[ expando ] = {});
@@ -1713,7 +1713,7 @@ Expr = Sizzle.selectors = {
 								// Fallback to seeking `elem` from the start
 								(diff = nodeIndex = 0) || start.pop()) ) {
 
-								// When found, cache indexes on `parent` and break
+								// When found, caches indexes on `parent` and break
 								if ( node.nodeType === 1 && ++diff && node === elem ) {
 									outerCache[ type ] = [ dirruns, nodeIndex, diff ];
 									break;
@@ -3024,10 +3024,10 @@ var rnotwhite = (/\S+/g);
 
 
 
-// String to Object options format cache
+// String to Object options format caches
 var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+// Convert String-formatted options into Object-formatted ones and store in caches
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
 	jQuery.each( options.match( rnotwhite ) || [], function( _, flag ) {
@@ -3061,7 +3061,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we check in caches first)
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
 		jQuery.extend( {}, options );
@@ -3553,7 +3553,7 @@ Data.prototype = {
 		}
 
 		var descriptor = {},
-			// Check if the owner object already has a cache key
+			// Check if the owner object already has a caches key
 			unlock = owner[ this.expando ];
 
 		// If not, create one
@@ -3573,7 +3573,7 @@ Data.prototype = {
 			}
 		}
 
-		// Ensure the cache object
+		// Ensure the caches object
 		if ( !this.cache[ unlock ] ) {
 			this.cache[ unlock ] = {};
 		}
@@ -3597,7 +3597,7 @@ Data.prototype = {
 			// Fresh assignments by object are shallow copied
 			if ( jQuery.isEmptyObject( cache ) ) {
 				jQuery.extend( this.cache[ unlock ], data );
-			// Otherwise, copy the properties one-by-one to the cache object
+			// Otherwise, copy the properties one-by-one to the caches object
 			} else {
 				for ( prop in data ) {
 					cache[ prop ] = data[ prop ];
@@ -3607,7 +3607,7 @@ Data.prototype = {
 		return cache;
 	},
 	get: function( owner, key ) {
-		// Either a valid cache is found, or will be created.
+		// Either a valid caches is found, or will be created.
 		// New caches will be created and the unlock returned,
 		// allowing direct access to the newly created
 		// empty data object. A valid owner object must be provided.
@@ -3626,7 +3626,7 @@ Data.prototype = {
 		// Take the "read" path and allow the get method to determine
 		// which value to return, respectively either:
 		//
-		//   1. The entire cache object
+		//   1. The entire caches object
 		//   2. The data stored at the key
 		//
 		if ( key === undefined ||
@@ -3818,16 +3818,16 @@ jQuery.fn.extend({
 			// (and therefore has an element appears at this[ 0 ]) and the
 			// `value` parameter was not undefined. An empty jQuery object
 			// will result in `undefined` for elem = this[ 0 ] which will
-			// throw an exception if an attempt to read a data cache is made.
+			// throw an exception if an attempt to read a data caches is made.
 			if ( elem && value === undefined ) {
-				// Attempt to get data from the cache
+				// Attempt to get data from the caches
 				// with the key as-is
 				data = data_user.get( elem, key );
 				if ( data !== undefined ) {
 					return data;
 				}
 
-				// Attempt to get data from the cache
+				// Attempt to get data from the caches
 				// with the key camelized
 				data = data_user.get( elem, camelKey );
 				if ( data !== undefined ) {
@@ -7809,7 +7809,7 @@ jQuery.extend({
 	// Counter for holding the number of active queries
 	active: 0,
 
-	// Last-Modified header cache for next request
+	// Last-Modified header caches for next request
 	lastModified: {},
 	etag: {},
 
@@ -7827,7 +7827,7 @@ jQuery.extend({
 		dataType: null,
 		username: null,
 		password: null,
-		cache: null,
+		caches: null,
 		throws: false,
 		traditional: false,
 		headers: {},
@@ -7909,7 +7909,7 @@ jQuery.extend({
 		options = options || {};
 
 		var transport,
-			// URL without anti-cache param
+			// URL without anti-caches param
 			cacheURL,
 			// Response headers
 			responseHeadersString,
@@ -8082,7 +8082,7 @@ jQuery.extend({
 				delete s.data;
 			}
 
-			// Add anti-cache in url if needed
+			// Add anti-caches in url if needed
 			if ( s.cache === false ) {
 				s.url = rts.test( cacheURL ) ?
 
@@ -8659,7 +8659,7 @@ jQuery.ajaxSetup({
 	}
 });
 
-// Handle cache's special case and crossDomain
+// Handle caches's special case and crossDomain
 jQuery.ajaxPrefilter( "script", function( s ) {
 	if ( s.cache === undefined ) {
 		s.cache = false;

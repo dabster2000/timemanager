@@ -30,7 +30,7 @@ Data.prototype = {
 		}
 
 		var descriptor = {},
-			// Check if the owner object already has a cache key
+			// Check if the owner object already has a caches key
 			unlock = owner[ this.expando ];
 
 		// If not, create one
@@ -50,7 +50,7 @@ Data.prototype = {
 			}
 		}
 
-		// Ensure the cache object
+		// Ensure the caches object
 		if ( !this.cache[ unlock ] ) {
 			this.cache[ unlock ] = {};
 		}
@@ -74,7 +74,7 @@ Data.prototype = {
 			// Fresh assignments by object are shallow copied
 			if ( jQuery.isEmptyObject( cache ) ) {
 				jQuery.extend( this.cache[ unlock ], data );
-			// Otherwise, copy the properties one-by-one to the cache object
+			// Otherwise, copy the properties one-by-one to the caches object
 			} else {
 				for ( prop in data ) {
 					cache[ prop ] = data[ prop ];
@@ -84,7 +84,7 @@ Data.prototype = {
 		return cache;
 	},
 	get: function( owner, key ) {
-		// Either a valid cache is found, or will be created.
+		// Either a valid caches is found, or will be created.
 		// New caches will be created and the unlock returned,
 		// allowing direct access to the newly created
 		// empty data object. A valid owner object must be provided.
@@ -103,7 +103,7 @@ Data.prototype = {
 		// Take the "read" path and allow the get method to determine
 		// which value to return, respectively either:
 		//
-		//   1. The entire cache object
+		//   1. The entire caches object
 		//   2. The data stored at the key
 		//
 		if ( key === undefined ||

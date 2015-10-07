@@ -904,10 +904,10 @@ jQuery.each("Boolean Number String Function Array Date RegExp Object".split(" ")
 
 // All jQuery objects should point back to these
 rootjQuery = jQuery(document);
-// String to Object options format cache
+// String to Object options format caches
 var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+// Convert String-formatted options into Object-formatted ones and store in caches
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
 	jQuery.each( options.split( core_rspace ), function( _, flag ) {
@@ -941,7 +941,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we check in caches first)
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
 		jQuery.extend( {}, options );
@@ -1548,12 +1548,12 @@ jQuery.extend({
 			// can't GC object references properly across the DOM-JS boundary
 			isNode = elem.nodeType,
 
-			// Only DOM nodes need the global jQuery cache; JS object data is
+			// Only DOM nodes need the global jQuery caches; JS object data is
 			// attached directly to the object so GC can occur automatically
 			cache = isNode ? jQuery.cache : elem,
 
-			// Only defining an ID for JS objects if its cache already exists allows
-			// the code to shortcut on the same path as a DOM node with no cache
+			// Only defining an ID for JS objects if its caches already exists allows
+			// the code to shortcut on the same path as a DOM node with no caches
 			id = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey;
 
 		// Avoid doing any more work than we need to when trying to get data on an
@@ -1564,7 +1564,7 @@ jQuery.extend({
 
 		if ( !id ) {
 			// Only DOM nodes need a new unique ID for each element since their data
-			// ends up in the global cache
+			// ends up in the global caches
 			if ( isNode ) {
 				elem[ internalKey ] = id = jQuery.deletedIds.pop() || jQuery.guid++;
 			} else {
@@ -1583,7 +1583,7 @@ jQuery.extend({
 		}
 
 		// An object can be passed to jQuery.data instead of a key/value pair; this gets
-		// shallow copied over onto the existing cache
+		// shallow copied over onto the existing caches
 		if ( typeof name === "object" || typeof name === "function" ) {
 			if ( pvt ) {
 				cache[ id ] = jQuery.extend( cache[ id ], name );
@@ -1595,7 +1595,7 @@ jQuery.extend({
 		thisCache = cache[ id ];
 
 		// jQuery data() is stored in a separate object inside the object's internal data
-		// cache in order to avoid key collisions between internal data and user-defined
+		// caches in order to avoid key collisions between internal data and user-defined
 		// data.
 		if ( !pvt ) {
 			if ( !thisCache.data ) {
@@ -1642,7 +1642,7 @@ jQuery.extend({
 			cache = isNode ? jQuery.cache : elem,
 			id = isNode ? elem[ jQuery.expando ] : jQuery.expando;
 
-		// If there is already no cache entry for this object, there is no
+		// If there is already no caches entry for this object, there is no
 		// purpose in continuing
 		if ( !cache[ id ] ) {
 			return;
@@ -1676,8 +1676,8 @@ jQuery.extend({
 					delete thisCache[ name[i] ];
 				}
 
-				// If there is no data left in the cache, we want to continue
-				// and let the cache object itself get destroyed
+				// If there is no data left in the caches, we want to continue
+				// and let the caches object itself get destroyed
 				if ( !( pvt ? isEmptyDataObject : jQuery.isEmptyObject )( thisCache ) ) {
 					return;
 				}
@@ -1688,18 +1688,18 @@ jQuery.extend({
 		if ( !pvt ) {
 			delete cache[ id ].data;
 
-			// Don't destroy the parent cache unless the internal data object
+			// Don't destroy the parent caches unless the internal data object
 			// had been the only thing left in it
 			if ( !isEmptyDataObject( cache[ id ] ) ) {
 				return;
 			}
 		}
 
-		// Destroy the cache
+		// Destroy the caches
 		if ( isNode ) {
 			jQuery.cleanData( [ elem ], true );
 
-		// Use delete when supported for expandos or `cache` is not a window per isWindow (#10080)
+		// Use delete when supported for expandos or `caches` is not a window per isWindow (#10080)
 		} else if ( jQuery.support.deleteExpando || cache != cache.window ) {
 			delete cache[ id ];
 
@@ -1829,7 +1829,7 @@ function dataAttr( elem, key, data ) {
 	return data;
 }
 
-// checks a cache object for emptiness
+// checks a caches object for emptiness
 function isEmptyDataObject( obj ) {
 	var name;
 	for ( name in obj ) {
@@ -2886,7 +2886,7 @@ jQuery.event = {
 		// Handle a global trigger
 		if ( !elem ) {
 
-			// TODO: Stop taunting the data cache; remove global events and always attach to document
+			// TODO: Stop taunting the data caches; remove global events and always attach to document
 			cache = jQuery.cache;
 			for ( i in cache ) {
 				if ( cache[ i ].events && cache[ i ].events[ type ] ) {
@@ -5984,7 +5984,7 @@ jQuery.fn.extend({
 
 				// Use the original fragment for the last item instead of the first because it can end up
 				// being emptied incorrectly in certain situations (#8070).
-				// Fragments from the fragment cache must always be cloned and never used in place.
+				// Fragments from the fragment caches must always be cloned and never used in place.
 				for ( iNoClone = results.cacheable || l - 1; i < l; i++ ) {
 					callback.call(
 						table && jQuery.nodeName( this[i], "table" ) ?
@@ -6143,10 +6143,10 @@ jQuery.buildFragment = function( args, context, scripts ) {
 	context = !context.nodeType && context[0] || context;
 	context = context.ownerDocument || context;
 
-	// Only cache "small" (1/2 KB) HTML strings that are associated with the main document
-	// Cloning options loses the selected state, so don't cache them
+	// Only caches "small" (1/2 KB) HTML strings that are associated with the main document
+	// Cloning options loses the selected state, so don't caches them
 	// IE 6 doesn't like it when you put <object> or <embed> elements in a fragment
-	// Also, WebKit does not clone 'checked' attributes on cloneNode, so don't cache
+	// Also, WebKit does not clone 'checked' attributes on cloneNode, so don't caches
 	// Lastly, IE6,7,8 will not correctly reuse cached fragments that were created from unknown elems #10501
 	if ( args.length === 1 && typeof first === "string" && first.length < 512 && context === document &&
 		first.charAt(0) === "<" && !rnocache.test( first ) &&
@@ -6163,7 +6163,7 @@ jQuery.buildFragment = function( args, context, scripts ) {
 		fragment = context.createDocumentFragment();
 		jQuery.clean( args, context, fragment, scripts );
 
-		// Update the cache, but only store false
+		// Update the caches, but only store false
 		// unless this is a second parsing of the same content
 		if ( cacheable ) {
 			jQuery.fragments[ first ] = cachehit && fragment;
@@ -6447,7 +6447,7 @@ jQuery.extend({
 						}
 					}
 
-					// Remove cache only if it was not already removed by jQuery.event.remove
+					// Remove caches only if it was not already removed by jQuery.event.remove
 					if ( cache[ id ] ) {
 
 						delete cache[ id ];
@@ -7557,7 +7557,7 @@ jQuery.extend({
 		dataType: null,
 		username: null,
 		password: null,
-		cache: null,
+		caches: null,
 		throws: false,
 		traditional: false,
 		headers: {},
@@ -7903,10 +7903,10 @@ jQuery.extend({
 				delete s.data;
 			}
 
-			// Get ifModifiedKey before adding the anti-cache parameter
+			// Get ifModifiedKey before adding the anti-caches parameter
 			ifModifiedKey = s.url;
 
-			// Add anti-cache in url if needed
+			// Add anti-caches in url if needed
 			if ( s.cache === false ) {
 
 				var ts = jQuery.now(),
@@ -8001,7 +8001,7 @@ jQuery.extend({
 	// Counter for holding the number of active queries
 	active: 0,
 
-	// Last-Modified header cache for next request
+	// Last-Modified header caches for next request
 	lastModified: {},
 	etag: {}
 
@@ -8261,7 +8261,7 @@ jQuery.ajaxSetup({
 	}
 });
 
-// Handle cache's special case and global
+// Handle caches's special case and global
 jQuery.ajaxPrefilter( "script", function( s ) {
 	if ( s.cache === undefined ) {
 		s.cache = false;
@@ -8523,7 +8523,7 @@ if ( jQuery.support.ajax ) {
 						// if we're in sync mode we fire the callback
 						callback();
 					} else if ( xhr.readyState === 4 ) {
-						// (IE6 & IE7) if it's in cache and has been
+						// (IE6 & IE7) if it's in caches and has been
 						// retrieved directly we need to fire the callback
 						setTimeout( callback, 0 );
 					} else {

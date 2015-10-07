@@ -850,7 +850,7 @@
 			else if ( ! col.sType ) {
 				for ( j=0, jen=types.length ; j<jen ; j++ ) {
 					for ( k=0, ken=data.length ; k<ken ; k++ ) {
-						// Use a cache array so we only need to get the type data
+						// Use a caches array so we only need to get the type data
 						// from the formatter once (when using multiple detectors)
 						if ( cache[k] === undefined ) {
 							cache[k] = _fnGetCellData( settings, k, i, 'type' );
@@ -1074,7 +1074,7 @@
 	
 	
 	/**
-	 * Get the data for a given cell from the internal cache, taking into account data mapping
+	 * Get the data for a given cell from the internal caches, taking into account data mapping
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} rowIdx aoData row id
 	 *  @param {int} colIdx Column index
@@ -1122,7 +1122,7 @@
 	
 	
 	/**
-	 * Set the value for a specific cell, into the internal data cache
+	 * Set the value for a specific cell, into the internal data caches
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} rowIdx aoData row id
 	 *  @param {int} colIdx Column index
@@ -4836,8 +4836,8 @@
 	}
 	
 	
-	// Get the data to sort a column, be it from cache, fresh (populating the
-	// cache), or from a sort formatter
+	// Get the data to sort a column, be it from caches, fresh (populating the
+	// caches), or from a sort formatter
 	function _fnSortData( settings, idx )
 	{
 		// Custom sorting function - provided by the sort data type
@@ -4851,7 +4851,7 @@
 			);
 		}
 	
-		// Use / populate cache
+		// Use / populate caches
 		var row, cellData;
 		var formatter = DataTable.ext.type.order[ column.sType+"-pre" ];
 	
@@ -6241,7 +6241,7 @@
 			}
 			$(this).addClass( oClasses.sTable );
 			
-			/* Calculate the scroll bar width and cache it for use later on */
+			/* Calculate the scroll bar width and caches it for use later on */
 			if ( oSettings.oScroll.sX !== "" || oSettings.oScroll.sY !== "" )
 			{
 				oSettings.oScroll.iBarWidth = _fnScrollBarWidth();
@@ -9172,10 +9172,10 @@
 		"_aData": [],
 	
 		/**
-		 * Sorting data cache - this array is ostensibly the same length as the
+		 * Sorting data caches - this array is ostensibly the same length as the
 		 * number of columns (although each index is generated only as it is
 		 * needed), and holds the data that is used for sorting each column in the
-		 * row. We do this cache generation at the start of the sort in order that
+		 * row. We do this caches generation at the start of the sort in order that
 		 * the formatting of the sort data need be done only once for each cell
 		 * per sort. This array should not be read from or written to by anything
 		 * other than the master sorting methods.
@@ -9186,7 +9186,7 @@
 		"_aSortData": null,
 	
 		/**
-		 * Per cell filtering data cache. As per the sort data cache, used to
+		 * Per cell filtering data caches. As per the sort data caches, used to
 		 * increase the performance of the filtering in DataTables
 		 *  @type array
 		 *  @default null
@@ -9195,9 +9195,9 @@
 		"_aFilterData": null,
 	
 		/**
-		 * Filtering data cache. This is the same as the cell filtering cache, but
+		 * Filtering data caches. This is the same as the cell filtering caches, but
 		 * in this case a string rather than an array. This is easily computed with
-		 * a join on `_aFilterData`, but is provided as a cache so the join isn't
+		 * a join on `_aFilterData`, but is provided as a caches so the join isn't
 		 * needed on every search (memory traded for performance)
 		 *  @type array
 		 *  @default null
@@ -9234,7 +9234,7 @@
 	 * DataTables needs about each individual column.
 	 *
 	 * Note that this object is related to {@link DataTable.defaults.column}
-	 * but this one is the internal data store for DataTables's cache of columns.
+	 * but this one is the internal data store for DataTables's caches of columns.
 	 * It should NOT be manipulated outside of DataTables. Any configuration should
 	 * be done through the initialisation options.
 	 *  @namespace
@@ -12547,7 +12547,7 @@
 	 * instance.
 	 *
 	 * Note that this object is related to {@link DataTable.defaults} but this
-	 * one is the internal data store for DataTables's cache of columns. It should
+	 * one is the internal data store for DataTables's caches of columns. It should
 	 * NOT be manipulated outside of DataTables. Any configuration should be done
 	 * through the initialisation options.
 	 *  @namespace

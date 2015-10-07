@@ -19,7 +19,7 @@ jQuery.ajaxSetup({
 	}
 });
 
-// Handle cache's special case and crossDomain
+// Handle caches's special case and crossDomain
 jQuery.ajaxPrefilter( "script", function( s ) {
 	if ( s.cache === undefined ) {
 		s.cache = false;

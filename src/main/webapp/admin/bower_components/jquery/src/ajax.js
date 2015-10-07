@@ -278,7 +278,7 @@ jQuery.extend({
 	// Counter for holding the number of active queries
 	active: 0,
 
-	// Last-Modified header cache for next request
+	// Last-Modified header caches for next request
 	lastModified: {},
 	etag: {},
 
@@ -296,7 +296,7 @@ jQuery.extend({
 		dataType: null,
 		username: null,
 		password: null,
-		cache: null,
+		caches: null,
 		throws: false,
 		traditional: false,
 		headers: {},
@@ -378,7 +378,7 @@ jQuery.extend({
 		options = options || {};
 
 		var transport,
-			// URL without anti-cache param
+			// URL without anti-caches param
 			cacheURL,
 			// Response headers
 			responseHeadersString,
@@ -551,7 +551,7 @@ jQuery.extend({
 				delete s.data;
 			}
 
-			// Add anti-cache in url if needed
+			// Add anti-caches in url if needed
 			if ( s.cache === false ) {
 				s.url = rts.test( cacheURL ) ?
 

@@ -302,7 +302,7 @@ Licensed under the MIT license.
 	// text is constant no matter where it is placed; the placements are a
 	// secondary property.
 	//
-	// Canvas maintains a cache of recently-used text info objects; getTextInfo
+	// Canvas maintains a caches of recently-used text info objects; getTextInfo
 	// either returns the cached element or creates a new entry.
 	//
 	// @param {string} layer A string of space-separated CSS classes uniquely
@@ -331,7 +331,7 @@ Licensed under the MIT license.
 			textStyle = font;
 		}
 
-		// Retrieve (or create) the cache for the text's layer and styles
+		// Retrieve (or create) the caches for the text's layer and styles
 
 		layerCache = this._textCache[layer];
 
@@ -347,7 +347,7 @@ Licensed under the MIT license.
 
 		info = styleCache[text];
 
-		// If we can't find a matching element in our cache, create a new one
+		// If we can't find a matching element in our caches, create a new one
 
 		if (info == null) {
 

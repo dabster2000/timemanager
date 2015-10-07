@@ -490,7 +490,7 @@ if (!document.createElement('canvas').getContext) {
     family: 'sans-serif'
   };
 
-  // Internal text style cache
+  // Internal text style caches
   var fontStyleCache = {};
 
   function processFontStyle(styleString) {

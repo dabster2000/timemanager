@@ -305,7 +305,7 @@ function Sizzle( selector, context, results, seed ) {
 /**
  * Create key-value caches of limited size
  * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
- *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
+ *	property name the (space-suffixed) string and (if the caches is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
 function createCache() {
@@ -1151,7 +1151,7 @@ Expr = Sizzle.selectors = {
 
 						start = [ forward ? parent.firstChild : parent.lastChild ];
 
-						// non-xml :nth-child(...) stores cache data on `parent`
+						// non-xml :nth-child(...) stores caches data on `parent`
 						if ( forward && useCache ) {
 							// Seek `elem` from a previously-cached index
 							outerCache = parent[ expando ] || (parent[ expando ] = {});
@@ -1165,7 +1165,7 @@ Expr = Sizzle.selectors = {
 								// Fallback to seeking `elem` from the start
 								(diff = nodeIndex = 0) || start.pop()) ) {
 
-								// When found, cache indexes on `parent` and break
+								// When found, caches indexes on `parent` and break
 								if ( node.nodeType === 1 && ++diff && node === elem ) {
 									outerCache[ type ] = [ dirruns, nodeIndex, diff ];
 									break;

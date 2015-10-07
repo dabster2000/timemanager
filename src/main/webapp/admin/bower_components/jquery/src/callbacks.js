@@ -3,10 +3,10 @@ define([
 	"./var/rnotwhite"
 ], function( jQuery, rnotwhite ) {
 
-// String to Object options format cache
+// String to Object options format caches
 var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+// Convert String-formatted options into Object-formatted ones and store in caches
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
 	jQuery.each( options.match( rnotwhite ) || [], function( _, flag ) {
@@ -40,7 +40,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we check in caches first)
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
 		jQuery.extend( {}, options );
