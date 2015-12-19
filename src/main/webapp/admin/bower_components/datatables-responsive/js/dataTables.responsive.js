@@ -120,7 +120,7 @@ Responsive.prototype = {
 			that._resize();
 		} ) );
 
-		// Destroy event handler
+		// Destroy event handlers
 		dt.on( 'destroy.dtr', function () {
 			$(window).off( 'resize.dtr orientationchange.dtr draw.dtr' );
 		} );
@@ -143,7 +143,7 @@ Responsive.prototype = {
 		// First pass - draw the table for the current viewport size
 		this._resize();
 
-		// Details handler
+		// Details handlers
 		var details = this.c.details;
 		if ( details.type ) {
 			that._detailsInit();
@@ -405,7 +405,7 @@ Responsive.prototype = {
 
 
 	/**
-	 * Initialisation for the details handler
+	 * Initialisation for the details handlers
 	 *
 	 * @private
 	 */
@@ -424,7 +424,7 @@ Responsive.prototype = {
 		var target   = details.target;
 		var selector = typeof target === 'string' ? target : 'td';
 
-		// Click handler to show / hide the details rows when they are available
+		// Click handlers to show / hide the details rows when they are available
 		$( dt.table().body() ).on( 'click', selector, function (e) {
 			// If the table is not collapsed (i.e. there is no hidden columns)
 			// then take no action
@@ -438,7 +438,7 @@ Responsive.prototype = {
 			}
 
 			// For column index, we determine if we should act or not in the
-			// handler - otherwise it is already okay
+			// handlers - otherwise it is already okay
 			if ( typeof target === 'number' ) {
 				var targetIdx = target < 0 ?
 					dt.columns().eq(0).length + target :

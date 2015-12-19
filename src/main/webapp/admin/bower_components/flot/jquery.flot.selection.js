@@ -125,7 +125,7 @@ The plugin allso adds the following methods to the plot object:
             selection.active = true;
 
             // this is a bit silly, but we have to use a closure to be
-            // able to whack the same handler again
+            // able to whack the same handlers again
             mouseUpHandler = function (e) { onMouseUp(e); };
             
             $(document).one("mouseup", mouseUpHandler);

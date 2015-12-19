@@ -162,7 +162,7 @@
      * eve.on
      [ method ]
      **
-     * Binds given event handler with a given name. You can use wildcards “`*`” for the names:
+     * Binds given event handlers with a given name. You can use wildcards “`*`” for the names:
      | eve.on("*.under.*", f);
      | eve("mouse.under.floor"); // triggers f
      * Use @eve to trigger the listener.
@@ -170,16 +170,16 @@
      > Arguments
      **
      - name (string) name of the event, dot (`.`) or slash (`/`) separated, with optional wildcards
-     - f (function) event handler function
+     - f (function) event handlers function
      **
-     = (function) returned function accepts a single numeric parameter that represents z-index of the handler. It is an optional feature and only used when you need to ensure that some subset of server will be invoked in a given order, despite of the order of assignment.
+     = (function) returned function accepts a single numeric parameter that represents z-index of the handlers. It is an optional feature and only used when you need to ensure that some subset of server will be invoked in a given order, despite of the order of assignment.
      > Example:
      | eve.on("mouse", eatIt)(2);
      | eve.on("mouse", scream);
      | eve.on("mouse", catchIt)(1);
      * This will ensure that `catchIt()` function will be called before `eatIt()`.
 	 *
-     * If you want to put your handler before non-indexed server, specify a negative value.
+     * If you want to put your handlers before non-indexed server, specify a negative value.
      * Note: I assume most of the time you don’t need to worry about z-index, but it’s nice to have this feature “just in case”.
     \*/
     eve.on = function (name, f) {
@@ -218,7 +218,7 @@
      > Arguments
 	 - event (string) event name
 	 - varargs (…) and any other arguments
-	 = (function) possible event handler function
+	 = (function) possible event handlers function
     \*/
 	eve.f = function (event) {
 		var attrs = [].slice.call(arguments, 1);
@@ -230,7 +230,7 @@
      * eve.stop
      [ method ]
      **
-     * Is used inside an event handler to stop the event, preventing any subsequent listeners from firing.
+     * Is used inside an event handlers to stop the event, preventing any subsequent listeners from firing.
     \*/
     eve.stop = function () {
         stop = 1;
@@ -239,7 +239,7 @@
      * eve.nt
      [ method ]
      **
-     * Could be used inside event handler to figure out actual name of the event.
+     * Could be used inside event handlers to figure out actual name of the event.
      **
      > Arguments
      **
@@ -259,7 +259,7 @@
      * eve.nts
      [ method ]
      **
-     * Could be used inside event handler to figure out actual name of the event.
+     * Could be used inside event handlers to figure out actual name of the event.
      **
      **
      = (array) names of the event
@@ -277,7 +277,7 @@
      > Arguments
      **
      - name (string) name of the event, dot (`.`) or slash (`/`) separated, with optional wildcards
-     - f (function) event handler function
+     - f (function) event handlers function
     \*/
     /*\
      * eve.unbind
@@ -345,7 +345,7 @@
      * eve.once
      [ method ]
      **
-     * Binds given event handler with a given name to only run once then unbind itself.
+     * Binds given event handlers with a given name to only run once then unbind itself.
      | eve.once("login", f);
      | eve("login"); // triggers f
      | eve("login"); // no listeners
@@ -354,7 +354,7 @@
      > Arguments
      **
      - name (string) name of the event, dot (`.`) or slash (`/`) separated, with optional wildcards
-     - f (function) event handler function
+     - f (function) event handlers function
      **
      = (function) same return function as @eve.on
     \*/
@@ -3222,18 +3222,18 @@
      * Element.click
      [ method ]
      **
-     * Adds event handler for click for the element.
+     * Adds event handlers for click for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unclick
      [ method ]
      **
-     * Removes event handler for click for the element.
+     * Removes event handlers for click for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3241,18 +3241,18 @@
      * Element.dblclick
      [ method ]
      **
-     * Adds event handler for double click for the element.
+     * Adds event handlers for double click for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.undblclick
      [ method ]
      **
-     * Removes event handler for double click for the element.
+     * Removes event handlers for double click for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3260,18 +3260,18 @@
      * Element.mousedown
      [ method ]
      **
-     * Adds event handler for mousedown for the element.
+     * Adds event handlers for mousedown for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unmousedown
      [ method ]
      **
-     * Removes event handler for mousedown for the element.
+     * Removes event handlers for mousedown for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3279,18 +3279,18 @@
      * Element.mousemove
      [ method ]
      **
-     * Adds event handler for mousemove for the element.
+     * Adds event handlers for mousemove for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unmousemove
      [ method ]
      **
-     * Removes event handler for mousemove for the element.
+     * Removes event handlers for mousemove for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3298,18 +3298,18 @@
      * Element.mouseout
      [ method ]
      **
-     * Adds event handler for mouseout for the element.
+     * Adds event handlers for mouseout for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unmouseout
      [ method ]
      **
-     * Removes event handler for mouseout for the element.
+     * Removes event handlers for mouseout for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3317,18 +3317,18 @@
      * Element.mouseover
      [ method ]
      **
-     * Adds event handler for mouseover for the element.
+     * Adds event handlers for mouseover for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unmouseover
      [ method ]
      **
-     * Removes event handler for mouseover for the element.
+     * Removes event handlers for mouseover for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3336,18 +3336,18 @@
      * Element.mouseup
      [ method ]
      **
-     * Adds event handler for mouseup for the element.
+     * Adds event handlers for mouseup for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.unmouseup
      [ method ]
      **
-     * Removes event handler for mouseup for the element.
+     * Removes event handlers for mouseup for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3355,18 +3355,18 @@
      * Element.touchstart
      [ method ]
      **
-     * Adds event handler for touchstart for the element.
+     * Adds event handlers for touchstart for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.untouchstart
      [ method ]
      **
-     * Removes event handler for touchstart for the element.
+     * Removes event handlers for touchstart for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3374,18 +3374,18 @@
      * Element.touchmove
      [ method ]
      **
-     * Adds event handler for touchmove for the element.
+     * Adds event handlers for touchmove for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.untouchmove
      [ method ]
      **
-     * Removes event handler for touchmove for the element.
+     * Removes event handlers for touchmove for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3393,18 +3393,18 @@
      * Element.touchend
      [ method ]
      **
-     * Adds event handler for touchend for the element.
+     * Adds event handlers for touchend for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.untouchend
      [ method ]
      **
-     * Removes event handler for touchend for the element.
+     * Removes event handlers for touchend for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
 
@@ -3412,18 +3412,18 @@
      * Element.touchcancel
      [ method ]
      **
-     * Adds event handler for touchcancel for the element.
+     * Adds event handlers for touchcancel for the element.
      > Parameters
-     - handler (function) handler for the event
+     - handlers (function) handlers for the event
      = (object) @Element
     \*/
     /*\
      * Element.untouchcancel
      [ method ]
      **
-     * Removes event handler for touchcancel for the element.
+     * Removes event handlers for touchcancel for the element.
      > Parameters
-     - handler (function) #optional handler for the event
+     - handlers (function) #optional handlers for the event
      = (object) @Element
     \*/
     for (var i = events.length; i--;) {
@@ -3528,10 +3528,10 @@
      **
      * Adds event server for hover for the element.
      > Parameters
-     - f_in (function) handler for hover in
-     - f_out (function) handler for hover out
-     - icontext (object) #optional context for hover in handler
-     - ocontext (object) #optional context for hover out handler
+     - f_in (function) handlers for hover in
+     - f_out (function) handlers for hover out
+     - icontext (object) #optional context for hover in handlers
+     - ocontext (object) #optional context for hover out handlers
      = (object) @Element
     \*/
     elproto.hover = function (f_in, f_out, scope_in, scope_out) {
@@ -3543,8 +3543,8 @@
      **
      * Removes event server for hover for the element.
      > Parameters
-     - f_in (function) handler for hover in
-     - f_out (function) handler for hover out
+     - f_in (function) handlers for hover in
+     - f_out (function) handlers for hover out
      = (object) @Element
     \*/
     elproto.unhover = function (f_in, f_out) {
@@ -3557,27 +3557,27 @@
      **
      * Adds event server for drag of the element.
      > Parameters
-     - onmove (function) handler for moving
-     - onstart (function) handler for drag start
-     - onend (function) handler for drag end
-     - mcontext (object) #optional context for moving handler
-     - scontext (object) #optional context for drag start handler
-     - econtext (object) #optional context for drag end handler
+     - onmove (function) handlers for moving
+     - onstart (function) handlers for drag start
+     - onend (function) handlers for drag end
+     - mcontext (object) #optional context for moving handlers
+     - scontext (object) #optional context for drag start handlers
+     - econtext (object) #optional context for drag end handlers
      * Additionaly following `drag` events will be triggered: `drag.start.<id>` on start, 
      * `drag.end.<id>` on end and `drag.move.<id>` on every move. When element will be dragged over another element 
      * `drag.over.<id>` will be fired as well.
      *
-     * Start event and start handler will be called in specified context or in context of the element with following parameters:
+     * Start event and start handlers will be called in specified context or in context of the element with following parameters:
      o x (number) x position of the mouse
      o y (number) y position of the mouse
      o event (object) DOM event object
-     * Move event and move handler will be called in specified context or in context of the element with following parameters:
+     * Move event and move handlers will be called in specified context or in context of the element with following parameters:
      o dx (number) shift by x from the start point
      o dy (number) shift by y from the start point
      o x (number) x position of the mouse
      o y (number) y position of the mouse
      o event (object) DOM event object
-     * End event and end handler will be called in specified context or in context of the element with following parameters:
+     * End event and end handlers will be called in specified context or in context of the element with following parameters:
      o event (object) DOM event object
      = (object) @Element
     \*/
@@ -3619,9 +3619,9 @@
      * Element.onDragOver
      [ method ]
      **
-     * Shortcut for assigning event handler for `drag.over.<id>` event, where id is id of the element (see @Element.id).
+     * Shortcut for assigning event handlers for `drag.over.<id>` event, where id is id of the element (see @Element.id).
      > Parameters
-     - f (function) handler for event, first argument would be the element you are dragging over
+     - f (function) handlers for event, first argument would be the element you are dragging over
     \*/
     elproto.onDragOver = function (f) {
         f ? eve.on("raphael.drag.over." + this.id, f) : eve.unbind("raphael.drag.over." + this.id);

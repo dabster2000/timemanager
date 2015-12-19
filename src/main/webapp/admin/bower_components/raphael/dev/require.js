@@ -1155,7 +1155,7 @@ var requirejs, require, define;
                     cb(evt);
                 });
                 if (name === 'error') {
-                    //Now that the error handler was triggered, remove
+                    //Now that the error handlers was triggered, remove
                     //the listeners, since this broken Module instance
                     //can stay around for a while in the registry.
                     delete this.events[name];
@@ -1852,9 +1852,9 @@ var requirejs, require, define;
                 useInteractive = true;
 
                 node.attachEvent('onreadystatechange', context.onScriptLoad);
-                //It would be great to add an error handler here to catch
+                //It would be great to add an error handlers here to catch
                 //404s in IE9+. However, onreadystatechange will fire before
-                //the error handler, so that does not help. If addEventListener
+                //the error handlers, so that does not help. If addEventListener
                 //is used, then IE will fire error before load, but we cannot
                 //use that pathway given the connect.microsoft.com issue
                 //mentioned above about not doing the 'script execute,
@@ -2023,7 +2023,7 @@ var requirejs, require, define;
             }
         }
 
-        //Always save off evaluating the def call until the script onload handler.
+        //Always save off evaluating the def call until the script onload handlers.
         //This allows multiple modules to be in a file without prematurely
         //tracing dependencies, and allows for anonymous module support,
         //where the module name is not known until the script onload event

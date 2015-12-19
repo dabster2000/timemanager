@@ -2824,7 +2824,7 @@
 		};
 	
 		// Resolve any column types that are unknown due to addition or invalidation
-		// @todo As per sort - can this be moved into an event handler?
+		// @todo As per sort - can this be moved into an event handlers?
 		_fnColumnTypes( oSettings );
 	
 		/* In server-side processing all filtering is done by the server, so no point hanging around here */
@@ -4522,7 +4522,7 @@
 			aSort;
 	
 		// Resolve any column types that are unknown due to addition or invalidation
-		// @todo Can this be moved into a 'data-ready' handler which is called when
+		// @todo Can this be moved into a 'data-ready' handlers which is called when
 		//   data is going to be used in the table?
 		_fnColumnTypes( oSettings );
 	
@@ -4680,7 +4680,7 @@
 	/**
 	 * Function to run on user sort request
 	 *  @param {object} settings dataTables settings object
-	 *  @param {node} attachTo node to attach the handler to
+	 *  @param {node} attachTo node to attach the handlers to
 	 *  @param {int} colIdx column sorting index
 	 *  @param {boolean} [append=false] Append the requested sort to the existing
 	 *    sort if true (i.e. multi-column sort)
@@ -4760,9 +4760,9 @@
 	
 	
 	/**
-	 * Attach a sort handler (click) to a node
+	 * Attach a sort handlers (click) to a node
 	 *  @param {object} settings dataTables settings object
-	 *  @param {node} attachTo node to attach the handler to
+	 *  @param {node} attachTo node to attach the handlers to
 	 *  @param {int} colIdx column sorting index
 	 *  @param {function} [callback] callback function
 	 *  @memberof DataTable#oApi
@@ -6273,7 +6273,7 @@
 			{
 				/* Get the language definitions from a file - because this Ajax call makes the language
 				 * get async to the remainder of this function we use bInitHandedOff to indicate that
-				 * _fnInitialise will be fired by the returned Ajax handler, rather than the constructor
+				 * _fnInitialise will be fired by the returned Ajax handlers, rather than the constructor
 				 */
 				$.ajax( {
 					dataType: 'json',
@@ -6393,7 +6393,7 @@
 			
 			/*
 			 * Sorting
-			 * @todo For modularisation (1.11) this needs to do into a sort start up handler
+			 * @todo For modularisation (1.11) this needs to do into a sort start up handlers
 			 */
 			
 			// If aaSorting is not defined, then we use the first indicator in asSorting
@@ -8927,7 +8927,7 @@
 	
 	// jQuery functions to operate on the tables
 	$.each( [ 'on', 'one', 'off' ], function (i, key) {
-		_api_register( key+'()', function ( /* event, handler */ ) {
+		_api_register( key+'()', function ( /* event, handlers */ ) {
 			var args = Array.prototype.slice.call(arguments);
 	
 			// Add the `dt` namespace automatically if it isn't already present
@@ -11726,7 +11726,7 @@
 	
 		/**
 		 * You can control the default ordering direction, and even alter the
-		 * behaviour of the sort handler (i.e. only allow ascending ordering etc)
+		 * behaviour of the sort handlers (i.e. only allow ascending ordering etc)
 		 * using this parameter.
 		 *  @type array
 		 *  @default [ 'asc', 'desc' ]

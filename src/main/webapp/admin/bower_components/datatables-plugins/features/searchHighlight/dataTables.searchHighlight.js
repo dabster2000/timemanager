@@ -57,7 +57,7 @@ $(document).on( 'init.dt.dth', function (e, settings, json) {
 				}
 			} )
 			.on( 'destroy', function () {
-				// Remove event handler
+				// Remove event handlers
 				table.off( 'draw.dt.dth column-visibility.dt.dth' );
 			} );
 	}

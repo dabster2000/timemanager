@@ -12,6 +12,7 @@ import dk.trustworks.timemanager.persistence.WeekRepository;
 import dk.trustworks.timemanager.persistence.WorkRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 import java.sql.SQLException;
 import java.time.DayOfWeek;
@@ -66,19 +67,28 @@ public class TaskWeekViewService extends DefaultLocalService {
             }
 
             taskWeekView.put("budgetleft", budgetLeft);
+            System.out.println(year+", "+weekNumber);
+
 
             Calendar c = getInstance();
             c.setFirstDayOfWeek(MONDAY);
             c.clear();
-            c.set(WEEK_OF_YEAR, weekNumber);
             c.set(YEAR, year);
+            c.set(WEEK_OF_YEAR, weekNumber);
+            System.out.println(c.get(YEAR)+", "+c.get(MONTH)+", "+c.get(DAY_OF_MONTH));
+
+
+            DateTime dateTime = new DateTime();
+            dateTime = dateTime.withYear(year).withDayOfWeek(1).withWeekOfWeekyear(weekNumber);
+
+            System.out.println(dateTime.getYear()+", "+ dateTime.getMonthOfYear()+", "+ dateTime.getDayOfMonth());
 
             for (int i = 0; i < 7; i++) {
-                List<Map<String, Object>> works = workRepository.findByYearAndMonthAndDayAndTaskUUIDAndUserUUID(c.get(YEAR), c.get(MONTH), c.get(DAY_OF_MONTH), taskUUID.toString(), userUUID);
+                List<Map<String, Object>> works = workRepository.findByYearAndMonthAndDayAndTaskUUIDAndUserUUID(dateTime.getYear(), dateTime.getMonthOfYear()-1, dateTime.getDayOfMonth(), taskUUID.toString(), userUUID);
                 for (Map<String, Object> work : works) {
                     taskWeekView.put(DayOfWeek.of(i + 1).getDisplayName(TextStyle.FULL, Locale.ENGLISH).toLowerCase(), work.get("workduration"));
                 }
-                c.add(DATE, 1);
+                dateTime = dateTime.plusDays(1);
             }
             return taskWeekView;
         }).forEach(result -> taskWeekViews.add(result));

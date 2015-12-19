@@ -512,7 +512,7 @@ jQuery.extend({
 			return fn.apply( context || this, args.concat( slice.call( arguments ) ) );
 		};
 
-		// Set the guid of unique handler to the same of original handler, so it can be removed
+		// Set the guid of unique handlers to the same of original handlers, so it can be removed
 		proxy.guid = fn.guid = fn.guid || jQuery.guid++;
 
 		return proxy;
@@ -901,7 +901,7 @@ function assert( fn ) {
 }
 
 /**
- * Adds the same handler for all of the specified attrs
+ * Adds the same handlers for all of the specified attrs
  * @param {String} attrs Pipe-separated list of attributes
  * @param {Function} handler The method that will be applied
  */
@@ -3420,7 +3420,7 @@ jQuery.extend({
 });
 
 /**
- * The ready event handler and self cleanup method
+ * The ready event handlers and self cleanup method
  */
 function completed() {
 	document.removeEventListener( "DOMContentLoaded", completed, false );
@@ -4092,19 +4092,19 @@ jQuery.event = {
 			return;
 		}
 
-		// Caller can pass in an object of custom data in lieu of the handler
+		// Caller can pass in an object of custom data in lieu of the handlers
 		if ( handler.handler ) {
 			handleObjIn = handler;
 			handler = handleObjIn.handler;
 			selector = handleObjIn.selector;
 		}
 
-		// Make sure that the handler has a unique ID, used to find/remove it later
+		// Make sure that the handlers has a unique ID, used to find/remove it later
 		if ( !handler.guid ) {
 			handler.guid = jQuery.guid++;
 		}
 
-		// Init the element's event structure and main handler, if this is the first
+		// Init the element's event structure and main handlers, if this is the first
 		if ( !(events = elemData.events) ) {
 			events = elemData.events = {};
 		}
@@ -4151,12 +4151,12 @@ jQuery.event = {
 				namespace: namespaces.join(".")
 			}, handleObjIn );
 
-			// Init the event handler queue if we're the first
+			// Init the event handlers queue if we're the first
 			if ( !(handlers = events[ type ]) ) {
 				handlers = events[ type ] = [];
 				handlers.delegateCount = 0;
 
-				// Only use addEventListener if the special events handler returns false
+				// Only use addEventListener if the special events handlers returns false
 				if ( !special.setup || special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
 					if ( elem.addEventListener ) {
 						elem.addEventListener( type, eventHandle, false );
@@ -4172,7 +4172,7 @@ jQuery.event = {
 				}
 			}
 
-			// Add to the element's handler list, delegates in front
+			// Add to the element's handlers list, delegates in front
 			if ( selector ) {
 				handlers.splice( handlers.delegateCount++, 0, handleObj );
 			} else {
@@ -4238,7 +4238,7 @@ jQuery.event = {
 				}
 			}
 
-			// Remove generic event handler if we removed something and no more server exist
+			// Remove generic event handlers if we removed something and no more server exist
 			// (avoids potential for endless recursion during removal of special event server)
 			if ( origCount && !handlers.length ) {
 				if ( !special.teardown || special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
@@ -4301,7 +4301,7 @@ jQuery.event = {
 			event.target = elem;
 		}
 
-		// Clone any incoming data and prepend the event, creating the handler arg list
+		// Clone any incoming data and prepend the event, creating the handlers arg list
 		data = data == null ?
 			[ event ] :
 			jQuery.makeArray( data, [ event ] );
@@ -4339,13 +4339,13 @@ jQuery.event = {
 				bubbleType :
 				special.bindType || type;
 
-			// jQuery handler
+			// jQuery handlers
 			handle = ( data_priv.get( cur, "events" ) || {} )[ event.type ] && data_priv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );
 			}
 
-			// Native handler
+			// Native handlers
 			handle = ontype && cur[ ontype ];
 			if ( handle && handle.apply && jQuery.acceptData( cur ) ) {
 				event.result = handle.apply( cur, data );
@@ -4672,7 +4672,7 @@ jQuery.Event = function( src, props ) {
 		this.type = src.type;
 
 		// Events bubbling up the document may have been marked as prevented
-		// by a handler lower down the tree; reflect the correct value.
+		// by a handlers lower down the tree; reflect the correct value.
 		this.isDefaultPrevented = src.defaultPrevented ||
 				src.defaultPrevented === undefined &&
 				// Support: Android<4.0
@@ -4753,7 +4753,7 @@ jQuery.each({
 				related = event.relatedTarget,
 				handleObj = event.handleObj;
 
-			// For mousenter/leave call the handler if related is outside the target.
+			// For mousenter/leave call the handlers if related is outside the target.
 			// NB: No relatedTarget if the mouse left/entered the browser window
 			if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
 				event.type = handleObj.origType;
@@ -4770,7 +4770,7 @@ jQuery.each({
 if ( !support.focusinBubbles ) {
 	jQuery.each({ focus: "focusin", blur: "focusout" }, function( orig, fix ) {
 
-		// Attach a single capturing handler on the document while someone wants focusin/focusout
+		// Attach a single capturing handlers on the document while someone wants focusin/focusout
 		var handler = function( event ) {
 				jQuery.event.simulate( fix, event.target, jQuery.event.fix( event ), true );
 			};
@@ -6384,7 +6384,7 @@ function defaultPrefilter( elem, props, opts ) {
 		hooks.unqueued++;
 
 		anim.always(function() {
-			// Ensure the complete handler is called before this completes
+			// Ensure the complete handlers is called before this completes
 			anim.always(function() {
 				hooks.unqueued--;
 				if ( !jQuery.queue( elem, "fx" ).length ) {
